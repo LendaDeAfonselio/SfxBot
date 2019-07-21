@@ -1,15 +1,25 @@
 //Packages and dependencies
 const Discord = require('discord.js');
+const fs = require('fs');
 
-//Instancias
+//Instances
 const client = new Discord.Client();
 const auth = require('./auth.json');
 
-//Para listar sfx pode ser fix
-// for (const file of commandFiles) {
-//     const command = require(`./${file}`);
-//     client.commands.set(command.name, command);
-// }
+client.commands = new Discord.Collection();
+
+//Gets all command names by the name of their file
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+
+//Gets all the names of the sfxs
+const sfxFiles = fs.readdirSync('./soundEffects').filter(file => file.endsWith('.mp3'));
+
+//Retrieves all commands
+for (const file of commandFiles) {
+    console.log(file);
+    const command = require(`./commands/${file}`);
+    client.commands.set(command.name, command);
+}
 
 //Ready
 client.once('ready', () => {
@@ -29,5 +39,19 @@ client.once('disconnect', () => {
 
 /*************************** Dinamic Commands ************************/
 client.on('message', message => {
-    // 
+    var args = message.content.slice(auth.prefix.length).split(/ +/);
+    var command = args.shift();
+    if (!message.content.startsWith(auth.prefix) || !client.commands.has(command)) return;
+
+    else {
+        try {
+            client.commands.get(command).execute(message, args, sfxFiles);
+        } catch (error) {
+            console.error(error);
+            message.reply('there was an error trying to execute that command!');
+        }
+    }
 });
+
+//Login
+client.login(auth.token);

@@ -17,3 +17,8 @@ In this section all planned and implemented functionalities for this bot will be
 
 ##Disclaimer##
 For the moment all functionalities are performed locally, in the future we will try to implement it in a "cloud service"
+
+##Installs##
+$ npm install discord.js
+$ npm install -g ffmpeg-binaries 
+$ npm install node-opus
