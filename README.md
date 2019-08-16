@@ -22,3 +22,4 @@ For the moment all functionalities are performed locally, in the future we will 
 $ npm install discord.js
 $ npm install -g ffmpeg-binaries 
 $ npm install node-opus
+$ npm install request

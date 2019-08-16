@@ -16,7 +16,6 @@ const sfxFiles = fs.readdirSync('./soundEffects').filter(file => file.endsWith('
 
 //Retrieves all commands
 for (const file of commandFiles) {
-    console.log(file);
     const command = require(`./commands/${file}`);
     client.commands.set(command.name, command);
 }
@@ -45,7 +44,12 @@ client.on('message', message => {
 
     else {
         try {
-            client.commands.get(command).execute(message, args, sfxFiles);
+            console.log(sfxFiles);
+            client.commands.get(command).execute(message, args, sfxFiles, function(data){
+                if(data != null){
+                    sfxFiles.push(data);
+                }
+            });
         } catch (error) {
             console.error(error);
             message.reply('there was an error trying to execute that command!');
