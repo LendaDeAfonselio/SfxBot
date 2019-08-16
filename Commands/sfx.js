@@ -12,7 +12,7 @@ module.exports = {
             return message.reply("You have to be in a voice channel to activate a sound effect");
         }
         if (!sfxList.includes(nameOfFile)) {
-            return message.reply("The sfx " + args[0] + " doesn't exist, for a list of all sfxs available do &list");
+            return message.reply("The sfx " + args[0] + " doesn't exist, for a list of all sfxs available do " + auth.prefix + "list");
         }
         else {
             vc.join()
