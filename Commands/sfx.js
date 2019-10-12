@@ -19,7 +19,7 @@ module.exports = {
                 .then(connection => {
                     const dispatcher = connection.playFile(audioFiles + nameOfFile);
                     dispatcher.on("end", end => {
-                        
+                        vc.leave();
                     });
                 })
                 .catch(console.error);
