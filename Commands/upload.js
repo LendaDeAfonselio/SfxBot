@@ -24,6 +24,7 @@ module.exports = {
                 if(extensionType != ""){
                     utils.download(firstAttachment.url, musicFileName + extensionType, audioFiles);
                     callback(musicFileName + extensionType);
+                    message.channel.send("The sfx was uploaded with great success!");
                 }
                 else{
                     message.channel.send("The file you sent has an invalid format");

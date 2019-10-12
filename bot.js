@@ -44,7 +44,6 @@ client.on('message', message => {
 
     else {
         try {
-            console.log(sfxFiles);
             client.commands.get(command).execute(message, args, sfxFiles, function(data){
                 if(data != null){
                     sfxFiles.push(data);
